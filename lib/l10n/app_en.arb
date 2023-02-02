@@ -1,0 +1,13 @@
+{
+  "appTitle": "Numbers",
+  "colorLabel": "Color",
+  "darkTheme": "Dark",
+  "languageLabel": "Language",
+  "lightTheme": "Light",
+  "mathPageTitle": "Math",
+  "settingsDialogTitle": "Settings",
+  "systemTheme": "System",
+  "themeLabel": "Theme",
+  "triviaPageTitle": "Trivia",
+  "yearPageTitle": "Year"
+}

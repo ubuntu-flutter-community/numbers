@@ -1,0 +1,13 @@
+{
+  "appTitle": "Numerot",
+  "colorLabel": "Väri",
+  "darkTheme": "Tumma",
+  "languageLabel": "Kieli",
+  "lightTheme": "Vaalea",
+  "mathPageTitle": "Matikka",
+  "settingsDialogTitle": "Asetukset",
+  "systemTheme": "Järjestelmä",
+  "themeLabel": "Teema",
+  "triviaPageTitle": "Trivia",
+  "yearPageTitle": "Vuosi"
+}
