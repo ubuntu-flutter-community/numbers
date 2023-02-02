@@ -11,19 +11,23 @@ class Numbers {
 
   void close() => _client.close();
 
-  Future<Number> getMath(int number) => _get('/$number/math');
-  Future<Number> getTrivia(int number) => _get('/$number/trivia');
-  Future<Number> getYear(int year) => _get('/$year/year');
+  Future<Number?> getMath(int number) => _get('/$number/math');
+  Future<Number?> getTrivia(int number) => _get('/$number/trivia');
+  Future<Number?> getYear(int year) => _get('/$year/year');
 
-  Future<Number> _get(String path) async {
+  Future<Number?> _get(String path) async {
     final url = Uri.http('numbersapi.com').resolve(path);
-    final response = await _client.get(url, headers: {
-      'Content-type': 'application/json',
-    });
-    if (response.statusCode == 200) {
-      return Number.fromJson(json.decode(utf8.decode(response.bodyBytes)));
-    } else {
-      throw Exception(response.statusCode);
+    try {
+      final response = await _client.get(url, headers: {
+        'Content-type': 'application/json',
+      });
+      if (response.statusCode == 200) {
+        return Number.fromJson(json.decode(utf8.decode(response.bodyBytes)));
+      } else {
+        return null;
+      }
+    } on http.ClientException {
+      return null;
     }
   }
 }

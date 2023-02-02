@@ -46,8 +46,9 @@ void main() {
 
     final numbers = Numbers(client: client);
     final value = await numbers.getMath(123);
+    expect(value, isNotNull);
+    expect(value!.number, equals(123));
     expect(value.text, equals('123 is the number'));
-    expect(value.number, equals(123));
   });
 
   test('trivia', () async {
@@ -65,8 +66,9 @@ void main() {
 
     final numbers = Numbers(client: client);
     final value = await numbers.getTrivia(456);
+    expect(value, isNotNull);
+    expect(value!.number, equals(456));
     expect(value.text, equals('456 is an uninteresting number'));
-    expect(value.number, equals(456));
   });
 
   test('year', () async {
@@ -84,17 +86,27 @@ void main() {
 
     final numbers = Numbers(client: client);
     final value = await numbers.getYear(2023);
+    expect(value, isNotNull);
+    expect(value!.number, equals(2023));
     expect(value.text, equals('2023 is the year'));
-    expect(value.number, equals(2023));
   });
 
-  test('fail', () async {
+  test('404', () async {
     final client = MockHttpClient();
     when(() => client.get(any(), headers: any(named: 'headers')))
         .thenAnswer((_) async => http.Response(json.encode(''), 404));
 
     final numbers = Numbers(client: client);
-    expect(numbers.getYear(789), throwsException);
+    expect(await numbers.getYear(789), isNull);
+  });
+
+  test('exception', () async {
+    final client = MockHttpClient();
+    when(() => client.get(any(), headers: any(named: 'headers')))
+        .thenThrow(http.ClientException(''));
+
+    final numbers = Numbers(client: client);
+    expect(await numbers.getYear(789), isNull);
   });
 
   test('close', () {
@@ -121,7 +133,8 @@ void main() {
 
     final numbers = Numbers(client: client);
     final value = await numbers.getMath(123);
-    expect(value.text, equals('nümber'));
+    expect(value, isNotNull);
+    expect(value!.text, equals('nümber'));
   });
 }
 
