@@ -32,7 +32,7 @@ void main() {
   });
 
   test('math', () async {
-    final url = Uri.http('numbersapi.com', '/123/math');
+    final url = Uri.http('numbersapi.com', '/123/math', {'json': ''});
     final response = {
       'text': '123 is the number',
       'found': true,
@@ -41,7 +41,7 @@ void main() {
     };
 
     final client = MockHttpClient();
-    when(() => client.get(url, headers: any(named: 'headers')))
+    when(() => client.get(url))
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
@@ -52,7 +52,7 @@ void main() {
   });
 
   test('trivia', () async {
-    final url = Uri.http('numbersapi.com', '/456/trivia');
+    final url = Uri.http('numbersapi.com', '/456/trivia', {'json': ''});
     final response = {
       'text': '456 is an uninteresting number',
       'found': true,
@@ -61,7 +61,7 @@ void main() {
     };
 
     final client = MockHttpClient();
-    when(() => client.get(url, headers: any(named: 'headers')))
+    when(() => client.get(url))
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
@@ -72,7 +72,7 @@ void main() {
   });
 
   test('year', () async {
-    final url = Uri.http('numbersapi.com', '/2023/year');
+    final url = Uri.http('numbersapi.com', '/2023/year', {'json': ''});
     final response = {
       'text': '2023 is the year',
       'found': true,
@@ -81,7 +81,7 @@ void main() {
     };
 
     final client = MockHttpClient();
-    when(() => client.get(url, headers: any(named: 'headers')))
+    when(() => client.get(url))
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
@@ -93,7 +93,7 @@ void main() {
 
   test('404', () async {
     final client = MockHttpClient();
-    when(() => client.get(any(), headers: any(named: 'headers')))
+    when(() => client.get(any()))
         .thenAnswer((_) async => http.Response(json.encode(''), 404));
 
     final numbers = Numbers(client: client);
@@ -102,8 +102,7 @@ void main() {
 
   test('exception', () async {
     final client = MockHttpClient();
-    when(() => client.get(any(), headers: any(named: 'headers')))
-        .thenThrow(http.ClientException(''));
+    when(() => client.get(any())).thenThrow(http.ClientException(''));
 
     final numbers = Numbers(client: client);
     expect(await numbers.getYear(789), isNull);
@@ -118,7 +117,7 @@ void main() {
   });
 
   test('utf-8', () async {
-    final url = Uri.http('numbersapi.com', '/123/math');
+    final url = Uri.http('numbersapi.com', '/123/math', {'json': ''});
     final response = {
       'text': 'nümber',
       'found': true,
@@ -127,9 +126,8 @@ void main() {
     };
 
     final client = MockHttpClient();
-    when(() => client.get(url, headers: any(named: 'headers'))).thenAnswer(
-        (_) async =>
-            http.Response.bytes(utf8.encode(json.encode(response)), 200));
+    when(() => client.get(url)).thenAnswer((_) async =>
+        http.Response.bytes(utf8.encode(json.encode(response)), 200));
 
     final numbers = Numbers(client: client);
     final value = await numbers.getMath(123);
