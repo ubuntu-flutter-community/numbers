@@ -21,7 +21,7 @@ class Numbers {
       'Content-type': 'application/json',
     });
     if (response.statusCode == 200) {
-      return Number.fromJson(json.decode(response.body));
+      return Number.fromJson(json.decode(utf8.decode(response.bodyBytes)));
     } else {
       throw Exception(response.statusCode);
     }

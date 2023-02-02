@@ -104,6 +104,25 @@ void main() {
     numbers.close();
     verify(() => client.close()).called(1);
   });
+
+  test('utf-8', () async {
+    final url = Uri.http('numbersapi.com', '/123/math');
+    final response = {
+      'text': 'nümber',
+      'found': true,
+      'number': 123,
+      'type': 'math',
+    };
+
+    final client = MockHttpClient();
+    when(() => client.get(url, headers: any(named: 'headers'))).thenAnswer(
+        (_) async =>
+            http.Response.bytes(utf8.encode(json.encode(response)), 200));
+
+    final numbers = Numbers(client: client);
+    final value = await numbers.getMath(123);
+    expect(value.text, equals('nümber'));
+  });
 }
 
 class MockHttpClient extends Mock implements http.Client {}
