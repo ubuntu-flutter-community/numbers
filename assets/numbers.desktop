@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Numbers
+Comment=YaruNavigationPage example
+Keywords=flutter;yaru;example;
+Exec=numbers
+Terminal=false
+Categories=Example;
