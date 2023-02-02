@@ -66,3 +66,11 @@ jobs:
       - uses: subosito/flutter-action@v2
       - run: flutter pub get
       - run: flutter build web -v
+
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+      - run: flutter pub get
+      - run: flutter build windows -v
