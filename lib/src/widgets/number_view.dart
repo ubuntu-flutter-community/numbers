@@ -13,7 +13,6 @@ class NumberView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          flex: 1,
           child: AnimatedSwitcher(
             duration: kThemeAnimationDuration,
             child: Center(
@@ -26,12 +25,14 @@ class NumberView extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 2,
           child: AnimatedSwitcher(
             duration: kThemeAnimationDuration,
-            child: data == null
-                ? const Center(child: YaruCircularProgressIndicator())
-                : Center(child: Text(data!.text)),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: data == null
+                  ? const YaruCircularProgressIndicator()
+                  : Text(data!.text),
+            ),
           ),
         ),
       ],
