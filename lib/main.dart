@@ -7,7 +7,7 @@ import 'services.dart';
 import 'settings.dart';
 
 void main() {
-  registerService(Numbers.new);
+  registerService(Numbers.new, dispose: (s) => s.close());
 
   runApp(
     ChangeNotifierProvider(

@@ -9,6 +9,8 @@ class Numbers {
 
   final http.Client _client;
 
+  void close() => _client.close();
+
   Future<Number> getMath(int number) => _get('/$number/math');
   Future<Number> getTrivia(int number) => _get('/$number/trivia');
   Future<Number> getYear(int year) => _get('/$year/year');
@@ -50,8 +52,8 @@ class Number {
       'found': found,
       'number': number,
       'type': type,
-      'date': date,
-      'year': year,
+      if (date != null) 'date': date,
+      if (year != null) 'year': year,
     };
   }
 
