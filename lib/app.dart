@@ -55,6 +55,7 @@ class NumbersPage extends StatelessWidget {
         icon: const Icon(YaruIcons.settings),
         label: Text(AppLocalizations.of(context).settingsDialogTitle),
         style: YaruNavigationRailStyle.labelled,
+        onTap: () => showSettingsDialog(context: context),
       ),
     );
   }
