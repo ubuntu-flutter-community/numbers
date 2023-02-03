@@ -51,10 +51,12 @@ class _TriviaPageState extends State<TriviaPage> {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: NumberView(number: model.number, result: model.value),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<TriviaModel>().load(randomInt()),
         child: const Icon(YaruIcons.refresh),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

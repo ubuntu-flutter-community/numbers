@@ -5,6 +5,17 @@
   "languageLabel": "Language",
   "lightTheme": "Light",
   "mathPageTitle": "Math",
+  "footerLabel": "Powered by <a href=\"{url}\">{title}</a>",
+  "@footerLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "url": {
+        "type": "String"
+      }
+    }
+  },
   "settingsDialogTitle": "Settings",
   "systemTheme": "System",
   "themeLabel": "Theme",

@@ -51,10 +51,12 @@ class _MathPageState extends State<MathPage> {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: NumberView(number: model.number, result: model.value),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<MathModel>().load(randomInt()),
         child: const Icon(YaruIcons.refresh),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

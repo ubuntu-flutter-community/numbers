@@ -52,10 +52,12 @@ class _YearPageState extends State<YearPage> {
         padding: const EdgeInsets.all(kYaruPagePadding),
         child: NumberView(number: model.year, result: model.value),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<YearModel>().load(randomYear),
         child: const Icon(YaruIcons.refresh),
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }
