@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -13,7 +14,8 @@ void main() {
   testWidgets('startup', (tester) async {
     final numbers = MockNumbers();
     const value = Number(found: true, number: 42, text: 'foo', type: 'math');
-    when(() => numbers.getMath(any())).thenAnswer((_) async => value);
+    when(() => numbers.getMath(any()))
+        .thenAnswer((_) async => Result.value(value));
     registerMockService<Numbers>(numbers);
 
     final settings = MockSettings();

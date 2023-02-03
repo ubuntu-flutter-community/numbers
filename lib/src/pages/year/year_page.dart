@@ -50,7 +50,7 @@ class _YearPageState extends State<YearPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(kYaruPagePadding),
-        child: NumberView(number: model.year, data: model.value),
+        child: NumberView(number: model.year, result: model.value),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<YearModel>().load(randomYear),

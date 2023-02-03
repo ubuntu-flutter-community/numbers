@@ -49,7 +49,7 @@ class _MathPageState extends State<MathPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(kYaruPagePadding),
-        child: NumberView(number: model.number, data: model.value),
+        child: NumberView(number: model.number, result: model.value),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<MathModel>().load(randomInt()),

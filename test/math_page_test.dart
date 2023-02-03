@@ -1,3 +1,4 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -41,7 +42,8 @@ void main() {
 
   testWidgets('present number', (tester) async {
     const value = Number(found: true, number: 123, text: 'foo', type: 'math');
-    final model = mockModel(number: 123, value: value);
+    final result = Result.value(value);
+    final model = mockModel(number: 123, value: result);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -73,11 +75,28 @@ void main() {
     await tester.pump();
     verify(() => model.load(any(that: isPositive))).called(1);
   });
+
+  testWidgets('error', (tester) async {
+    final error = Result<Number>.error('err');
+    final model = mockModel(number: 123, value: error);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ChangeNotifierProvider<MathModel>.value(
+          value: model,
+          child: const MathPage(),
+        ),
+      ),
+    );
+
+    expect(find.text('123'), findsOneWidget);
+    expect(find.text('err'), findsOneWidget);
+  });
 }
 
 class MockMathModel extends Mock implements MathModel {}
 
-MockMathModel mockModel({required int number, Number? value}) {
+MockMathModel mockModel({required int number, Result<Number>? value}) {
   final model = MockMathModel();
   when(() => model.number).thenReturn(number);
   when(() => model.value).thenReturn(value);
