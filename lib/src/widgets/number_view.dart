@@ -1,12 +1,13 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:numbers/services.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class NumberView extends StatelessWidget {
-  const NumberView({super.key, required this.number, required this.data});
+  const NumberView({super.key, required this.number, required this.result});
 
   final int number;
-  final Number? data;
+  final Result<Number>? result;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,11 @@ class NumberView extends StatelessWidget {
             duration: kThemeAnimationDuration,
             child: Align(
               alignment: Alignment.topCenter,
-              child: data == null
+              child: result == null
                   ? const YaruCircularProgressIndicator()
-                  : Text(data!.text),
+                  : result!.isError
+                      ? Text(result!.asError!.error.toString())
+                      : Text(result!.asValue!.value.text),
             ),
           ),
         ),

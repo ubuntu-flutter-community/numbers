@@ -45,9 +45,11 @@ void main() {
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
-    final value = await numbers.getMath(123);
-    expect(value, isNotNull);
-    expect(value!.number, equals(123));
+    final result = await numbers.getMath(123);
+    expect(result.isValue, isTrue);
+
+    final value = result.asValue!.value;
+    expect(value.number, equals(123));
     expect(value.text, equals('123 is the number'));
   });
 
@@ -65,9 +67,11 @@ void main() {
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
-    final value = await numbers.getTrivia(456);
-    expect(value, isNotNull);
-    expect(value!.number, equals(456));
+    final result = await numbers.getTrivia(456);
+    expect(result.isValue, isTrue);
+
+    final value = result.asValue!.value;
+    expect(value.number, equals(456));
     expect(value.text, equals('456 is an uninteresting number'));
   });
 
@@ -85,27 +89,33 @@ void main() {
         .thenAnswer((_) async => http.Response(json.encode(response), 200));
 
     final numbers = Numbers(client: client);
-    final value = await numbers.getYear(2023);
-    expect(value, isNotNull);
-    expect(value!.number, equals(2023));
+    final result = await numbers.getYear(2023);
+    expect(result.isValue, isTrue);
+
+    final value = result.asValue!.value;
+    expect(value.number, equals(2023));
     expect(value.text, equals('2023 is the year'));
   });
 
   test('404', () async {
     final client = MockHttpClient();
-    when(() => client.get(any()))
-        .thenAnswer((_) async => http.Response(json.encode(''), 404));
+    when(() => client.get(any())).thenAnswer(
+        (_) async => http.Response('', 404, reasonPhrase: 'not found'));
 
     final numbers = Numbers(client: client);
-    expect(await numbers.getYear(789), isNull);
+    final result = await numbers.getYear(789);
+    expect(result.isError, isTrue);
+    expect(result.asError!.error.toString(), contains('not found (404)'));
   });
 
   test('exception', () async {
     final client = MockHttpClient();
-    when(() => client.get(any())).thenThrow(http.ClientException(''));
+    when(() => client.get(any())).thenThrow(http.ClientException('err'));
 
     final numbers = Numbers(client: client);
-    expect(await numbers.getYear(789), isNull);
+    final result = await numbers.getYear(789);
+    expect(result.isError, isTrue);
+    expect(result.asError!.error.toString(), contains('err'));
   });
 
   test('close', () {
@@ -130,9 +140,11 @@ void main() {
         http.Response.bytes(utf8.encode(json.encode(response)), 200));
 
     final numbers = Numbers(client: client);
-    final value = await numbers.getMath(123);
-    expect(value, isNotNull);
-    expect(value!.text, equals('nümber'));
+    final result = await numbers.getMath(123);
+    expect(result.isValue, isTrue);
+
+    final value = result.asValue!.value;
+    expect(value.text, equals('nümber'));
   });
 }
 

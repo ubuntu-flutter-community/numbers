@@ -1,7 +1,8 @@
+import 'package:async/async.dart';
 import 'package:numbers/src/services/numbers.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
-class MathModel extends SafeValueNotifier<Number?> {
+class MathModel extends SafeValueNotifier<Result<Number>?> {
   MathModel(this._numbers) : super(null);
 
   final Numbers _numbers;
