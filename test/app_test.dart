@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:numbers/app.dart';
-import 'package:numbers/services.dart';
+import 'package:numbers/numbers.dart';
 import 'package:numbers/settings.dart';
 import 'package:numbers/src/pages/math/math_page.dart';
 import 'package:provider/provider.dart';

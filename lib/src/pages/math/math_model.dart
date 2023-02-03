@@ -1,5 +1,5 @@
 import 'package:async/async.dart';
-import 'package:numbers/src/services/numbers.dart';
+import 'package:numbers/numbers.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class MathModel extends SafeValueNotifier<Result<Number>?> {

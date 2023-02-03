@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
-import 'package:numbers/services.dart';
+import 'package:numbers/numbers.dart';
 
 void main() {
   setUpAll(() => registerFallbackValue(Uri()));

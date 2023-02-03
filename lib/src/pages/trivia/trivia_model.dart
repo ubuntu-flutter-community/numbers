@@ -1,5 +1,5 @@
 import 'package:async/async.dart';
-import 'package:numbers/services.dart';
+import 'package:numbers/numbers.dart';
 import 'package:safe_change_notifier/safe_change_notifier.dart';
 
 class TriviaModel extends SafeValueNotifier<Result<Number>?> {

@@ -1,6 +1,6 @@
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
-import 'package:numbers/services.dart';
+import 'package:numbers/numbers.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class NumberView extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:ubuntu_service/ubuntu_service.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 import 'app.dart';
-import 'services.dart';
+import 'numbers.dart';
 import 'settings.dart';
 
 Future<void> main() async {
