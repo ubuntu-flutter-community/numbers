@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
   handy_window: ^0.2.1
   http: ^0.13.5
+  integration_test:
+    sdk: flutter
   intl: ^0.17.0
   meta: ^1.8.0
   provider: ^6.0.5
