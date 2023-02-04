@@ -31,12 +31,12 @@ class Number {
 
   factory Number.fromJson(Map<String, dynamic> json) {
     return Number(
-      text: json['text'],
-      found: json['found'],
-      number: json['number'],
-      type: json['type'],
-      date: json['date'],
-      year: json['year'],
+      text: json['text'] as String,
+      found: json['found'] as bool,
+      number: json['number'] as num,
+      type: json['type'] as String,
+      date: json['date'] as String?,
+      year: json['year'] as String?,
     );
   }
 
