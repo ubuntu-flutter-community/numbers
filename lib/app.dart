@@ -22,7 +22,6 @@ class NumbersApp extends StatelessWidget {
         theme: yaru.theme,
         darkTheme: yaru.darkTheme,
         themeMode: context.select((Settings s) => s.theme),
-        locale: context.select((Settings s) => s.locale),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => Scaffold(

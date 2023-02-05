@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import 'package:yaru/yaru.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
+import 'settings.dart';
 import 'settings_widgets.dart';
 
 Future<void> showSettingsDialog({required BuildContext context}) {
@@ -17,50 +20,32 @@ class SettingsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return AlertDialog(
-      titlePadding: EdgeInsets.zero,
-      title: YaruDialogTitleBar(
-        title: Text(l10n.settingsDialogTitle),
-      ),
-      contentPadding: const EdgeInsets.all(kYaruPagePadding / 2),
-      content: Table(
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    return Dialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          TableRow(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(kYaruPagePadding / 2),
-                child: Text(l10n.themeLabel),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(kYaruPagePadding / 2),
-                child: ThemePopupMenuButton(),
-              ),
-            ],
+          YaruDialogTitleBar(
+            title: Text(l10n.settingsDialogTitle),
           ),
-          TableRow(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(kYaruPagePadding / 2),
-                child: Text(l10n.colorLabel),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(kYaruPagePadding / 2),
-                child: ColorPopupMenuButton(),
-              ),
-            ],
-          ),
-          TableRow(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(kYaruPagePadding / 2),
-                child: Text(l10n.languageLabel),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(kYaruPagePadding / 2),
-                child: LanguagePopupMenuButton(),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(kYaruPagePadding),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.2,
+                  child: ThemeSelector(
+                    theme: context.select((Settings s) => s.theme),
+                    onChanged: context.read<Settings>().setTheme,
+                  ),
+                ),
+                const SizedBox(height: kYaruPagePadding),
+                VariantSelector(
+                  variant: YaruTheme.of(context).variant,
+                  onChanged: context.read<Settings>().setVariant,
+                ),
+              ],
+            ),
           ),
         ],
       ),

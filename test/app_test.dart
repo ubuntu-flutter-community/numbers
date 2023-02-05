@@ -19,7 +19,6 @@ void main() {
     registerMockService<Numbers>(numbers);
 
     final settings = MockSettings();
-    when(() => settings.locale).thenReturn(const Locale('fi'));
     when(() => settings.theme).thenReturn(ThemeMode.dark);
     when(() => settings.variant).thenReturn(YaruVariant.purple);
 
@@ -32,7 +31,6 @@ void main() {
 
     expect(find.byType(MathPage), findsOneWidget);
     final context = tester.element(find.byType(MathPage));
-    expect(Localizations.localeOf(context), equals(const Locale('fi')));
     expect(Theme.of(context).brightness, equals(Brightness.dark));
     expect(YaruTheme.of(context).variant, equals(YaruVariant.purple));
   });
