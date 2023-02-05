@@ -1,0 +1,5 @@
+dependency_overrides:
+  yaru_widgets:
+    git:
+      url: https://github.com/ubuntu/yaru_widgets.dart
+      ref: 6e1e54f401442584be278e77cf951b36905b7f4c
