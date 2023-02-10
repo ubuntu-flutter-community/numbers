@@ -54,7 +54,45 @@ class NumbersPage extends StatelessWidget {
         icon: const Icon(YaruIcons.settings),
         label: Text(AppLocalizations.of(context).settingsDialogTitle),
         style: YaruNavigationRailStyle.labelled,
-        onTap: () => showSettingsDialog(context: context),
+        onTap: () => showSettingsDialog(
+          context: context,
+          themePreviewBuilder: (_) => const NumbersPreview(),
+        ),
+      ),
+    );
+  }
+}
+
+class NumbersPreview extends StatelessWidget {
+  const NumbersPreview({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Scaffold(
+      appBar: const YaruTitleBar(
+        isMinimizable: true,
+        isMaximizable: true,
+        isClosable: true,
+      ),
+      body: YaruNavigationPage(
+        length: pages.length,
+        itemBuilder: (context, index, selected) => YaruNavigationRailItem(
+          icon: pages[index].iconBuilder(context),
+          label: pages[index].titleBuilder(context),
+          style: YaruNavigationRailStyle.compact,
+          selected: selected,
+        ),
+        pageBuilder: (context, index) => const SizedBox.shrink(),
+        trailing: YaruNavigationRailItem(
+          icon: const Icon(YaruIcons.settings),
+          label: Text(l10n.settingsDialogTitle),
+          style: YaruNavigationRailStyle.compact,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(YaruIcons.refresh),
       ),
     );
   }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:numbers/pages.dart';
 import 'package:yaru/yaru.dart';
-import 'package:yaru_icons/yaru_icons.dart';
 import 'package:yaru_widgets/yaru_widgets.dart';
 
 class ThemeSelector extends StatelessWidget {
   const ThemeSelector({
     super.key,
     ThemeMode? theme,
+    this.previewBuilder,
     required this.onChanged,
   }) : theme = theme ?? ThemeMode.system;
 
   final ThemeMode theme;
+  final WidgetBuilder? previewBuilder;
   final ValueChanged<ThemeMode> onChanged;
 
   @override
@@ -31,12 +31,14 @@ class ThemeSelector extends StatelessWidget {
                 ThemeCard(
                   title: Text(l10n.systemTheme),
                   theme: YaruTheme.of(context).theme ?? yaruLight,
+                  previewBuilder: previewBuilder,
                 ),
                 YaruClip.diagonal(
                   position: YaruDiagonalClip.bottomLeft,
                   child: ThemeCard(
                     title: Text(l10n.systemTheme),
                     theme: YaruTheme.of(context).darkTheme ?? yaruDark,
+                    previewBuilder: previewBuilder,
                   ),
                 ),
               ],
@@ -52,6 +54,7 @@ class ThemeSelector extends StatelessWidget {
             child: ThemeCard(
               theme: YaruTheme.of(context).theme ?? yaruLight,
               title: Text(l10n.lightTheme),
+              previewBuilder: previewBuilder,
             ),
           ),
         ),
@@ -64,6 +67,7 @@ class ThemeSelector extends StatelessWidget {
             child: ThemeCard(
               theme: YaruTheme.of(context).darkTheme ?? yaruDark,
               title: Text(l10n.darkTheme),
+              previewBuilder: previewBuilder,
             ),
           ),
         ),
@@ -76,17 +80,18 @@ class ThemeCard extends StatelessWidget {
   const ThemeCard({
     super.key,
     this.title,
+    this.previewBuilder,
     required this.theme,
     this.scale = 0.3,
   });
 
   final Widget? title;
+  final WidgetBuilder? previewBuilder;
   final ThemeData theme;
   final double scale;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     return Theme(
       data: theme,
       child: IgnorePointer(
@@ -101,34 +106,7 @@ class ThemeCard extends StatelessWidget {
                 height: constraints.maxHeight / scale,
                 child: Stack(
                   children: [
-                    Scaffold(
-                      appBar: const YaruTitleBar(
-                        isMinimizable: true,
-                        isMaximizable: true,
-                        isClosable: true,
-                      ),
-                      body: YaruNavigationPage(
-                        length: pages.length,
-                        itemBuilder: (context, index, selected) =>
-                            YaruNavigationRailItem(
-                          icon: pages[index].iconBuilder(context),
-                          label: pages[index].titleBuilder(context),
-                          style: YaruNavigationRailStyle.compact,
-                          selected: selected,
-                        ),
-                        pageBuilder: (context, index) =>
-                            const SizedBox.shrink(),
-                        trailing: YaruNavigationRailItem(
-                          icon: const Icon(YaruIcons.settings),
-                          label: Text(l10n.settingsDialogTitle),
-                          style: YaruNavigationRailStyle.compact,
-                        ),
-                      ),
-                      floatingActionButton: FloatingActionButton(
-                        onPressed: () {},
-                        child: const Icon(YaruIcons.refresh),
-                      ),
-                    ),
+                    Builder(builder: previewBuilder ?? (_) => const Scaffold()),
                     if (title != null)
                       DefaultTextStyle(
                         style: Theme.of(context).textTheme.displayLarge!,
