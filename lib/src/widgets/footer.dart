@@ -15,7 +15,7 @@ class Footer extends StatelessWidget {
         Html(
           data: l10n.footerLabel('numberapi.com', 'http://numbersapi.com'),
           shrinkWrap: true,
-          onAnchorTap: (url, _, __, ___) => launchUrlString(url!),
+          onAnchorTap: (url, _, __) => launchUrlString(url!),
         ),
       ],
     );
