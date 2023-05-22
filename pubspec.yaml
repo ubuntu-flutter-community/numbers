@@ -14,7 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   handy_window: ^0.3.0
-  http: ^0.13.5
+  http: ^1.0.0
   integration_test:
     sdk: flutter
   intl: ^0.18.0
