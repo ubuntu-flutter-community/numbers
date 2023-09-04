@@ -1,10 +1,21 @@
 {
-  "appTitle": "Tal",
+  "appTitle": "Nummer",
   "colorLabel": "Färg",
-  "darkTheme": "Mörk",
+  "darkTheme": "Mörkt",
   "languageLabel": "Språk",
-  "lightTheme": "Ljus",
-  "mathPageTitle": "Matte",
+  "lightTheme": "Ljust",
+  "mathPageTitle": "Matematik",
+  "footerLabel": "Drivs av <a href=\"{url}\">{title}</a>",
+  "@footerLabel": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "url": {
+        "type": "String"
+      }
+    }
+  },
   "settingsDialogTitle": "Inställningar",
   "systemTheme": "System",
   "themeLabel": "Tema",
